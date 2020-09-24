@@ -282,14 +282,14 @@ exports.getDayNumber = functions.https.onRequest((request, response) => {
     // The whole response has been received
     resp.on('end', () => {
         //console.log(data);
-        var index = data.lastIndexOf("Day ");
-        var dayNum = data.substring(index+4, index + 5);
+        var index = data.lastIndexOf("Cohort ");
+        var dayNum = data.substring(index+7, index + 8);
         //var dayNumAsInt = parseInt(dayNum, 10);
 
         admin.firestore().doc('info/dayNumber').get()
         .then(snapshot => {
             if (snapshot.exists) {
-                console.log('Day:' + dayNum);
+                console.log('Cohort:' + dayNum);
                 response.send(dayNum);
                 return snapshot.ref.set({
                     dayNumber: dayNum,
